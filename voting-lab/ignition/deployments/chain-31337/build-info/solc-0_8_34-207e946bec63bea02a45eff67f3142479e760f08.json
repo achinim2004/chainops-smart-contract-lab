@@ -1,0 +1,49 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_34-207e946bec63bea02a45eff67f3142479e760f08",
+  "solcVersion": "0.8.34",
+  "solcLongVersion": "0.8.34+commit.80d5c536",
+  "compilerType": "solc",
+  "toolVersions": {
+    "hardhat": "3.21.2"
+  },
+  "userSourceNameMap": {
+    "contracts/SimpleVoting.sol": "project/contracts/SimpleVoting.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "osaka",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode.linkReferences",
+            "evm.bytecode.object",
+            "evm.bytecode.opcodes",
+            "evm.bytecode.sourceMap",
+            "evm.deployedBytecode.immutableReferences",
+            "evm.deployedBytecode.linkReferences",
+            "evm.deployedBytecode.object",
+            "evm.deployedBytecode.opcodes",
+            "evm.deployedBytecode.sourceMap",
+            "evm.methodIdentifiers"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/SimpleVoting.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.34;\r\n\r\ncontract SimpleVoting {\r\n    uint256[2] public voteCounts;\r\n    mapping(address => bool) public hasVoted;\r\n    event VoteCast(address indexed voter, uint256 indexed candidateId);\r\n\r\nfunction vote(uint256 candidateId) external {\r\n    require(candidateId < 2, \"Invalid candidate\");\r\n    require(!hasVoted[msg.sender], \"Already voted\");\r\n\r\n    hasVoted[msg.sender] = true;\r\nvoteCounts[candidateId] += 1;\r\n\r\nemit VoteCast(msg.sender, candidateId);\r\n    \r\n}\r\n\r\n\r\n}\r\n\r\n"
+      }
+    }
+  }
+}
